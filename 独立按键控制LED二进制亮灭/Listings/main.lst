@@ -1,0 +1,59 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              12/30/2022 13:17:59 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\MDK5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main.ls
+                    -t) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          
+   3          void delay(unsigned int ms)             //@12.000MHz
+   4          {
+   5   1          unsigned int k;
+   6   1              unsigned char i, j;
+   7   1          for(k=0; k<ms; k++)
+   8   1          {
+   9   2              i = 12;
+  10   2              j = 169;
+  11   2              do
+  12   2              {
+  13   3                  while (--j);
+  14   3              } while (--i);
+  15   2          }
+  16   1      }
+  17          
+  18          int main(void)
+  19          {
+  20   1              for (;;)
+  21   1              {
+  22   2                      if (P3_1 == 0)
+  23   2                      {
+  24   3                              delay(20);
+  25   3                              P2 -= 1;
+  26   3                              delay(20);
+  27   3                      }
+  28   2              if(P2 == 0)
+  29   2              {
+  30   3                  P2 = 0xFF;
+  31   3              }
+  32   2              }
+  33   1              return 0;
+  34   1      }
+*** WARNING C294 IN LINE 33 OF main.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     51    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,29 @@
+#include <REGX52.H>
+
+void Delay500ms()		//@11.0592MHz
+{
+	unsigned char i, j, k;
+
+	_nop_();
+	_nop_();
+	i = 22;
+	j = 3;
+	k = 227;
+	do
+	{
+		do
+		{
+			while (--k);
+		} while (--j);
+	} while (--i);
+}
+
+int main(void)
+{
+    for(;;)
+    {
+        P2 = 0xFE;
+        P2 = 0xFF;
+    }
+    return 0;
+}

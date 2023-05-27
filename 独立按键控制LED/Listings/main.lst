@@ -1,0 +1,59 @@
+C51 COMPILER V9.54   MAIN                                                                  01/03/2023 13:34:42 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\Keil5 C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ma
+                    -in.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Delay.h"
+   3          //int main(void)
+   4          //{
+   5          //    //P2 = 0xFE;//直接操作整个寄存器
+   6          //    for (;;)
+   7          //    {
+   8          //        if (P3_1 == 0)
+   9          //            P2_0 = 0;//单独操作位寄存器
+  10          //        else
+  11          //            P2_0 = 1;
+  12          //    }
+  13          //    return 0;
+  14          //}
+  15          
+  16          //新写法
+  17          int main(void)
+  18          {
+  19   1          //P2 = 0xFE;//直接操作整个寄存器
+  20   1          for (;;)
+  21   1          {
+  22   2              if (P3_1 == 0)
+  23   2              {
+  24   3                  Delay(20);
+  25   3                  while(P3_1 == 0);
+  26   3                  P2_0 = ~P2_0;//单独操作位寄存器
+  27   3                  //Delay(20);
+  28   3                  while(P3_1 == 1);
+  29   3                  Delay(20);
+  30   3              }
+  31   2                  
+  32   2          }
+  33   1          return 0;
+  34   1      }
+*** WARNING C294 IN LINE 33 OF main.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     27    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
