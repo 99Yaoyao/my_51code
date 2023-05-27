@@ -1,0 +1,76 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              04/14/2023 11:19:01 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\main.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "public.h"
+   2          #include "key.h"
+   3          #include "beep.h"
+   4          #include "smg.h"
+   5          #include "time.h"
+   6          
+   7          
+   8          void main()
+   9          {       
+  10   1              u8 key=0;
+  11   1              u8 time_buf[8];
+  12   1              u8 time_flag=0;
+  13   1              time0_init();
+  14   1          
+  15   1              for(;;)
+  16   1              {
+  17   2                      key=key_scan(0);
+  18   2                      if(key==KEY1_PRESS)
+  19   2                      {
+  20   3                              time_flag=!time_flag;
+  21   3                              beep_alarm(1000,10);
+  22   3                      }       
+  23   2                      else if(key==KEY2_PRESS)
+  24   2                      {
+  25   3                              time0_stop();
+  26   3                              time_flag=0;
+  27   3                              gmin=0;
+  28   3                              gsec=0;
+  29   3                              gmsec=0;
+  30   3                              beep_alarm(1000,10);
+  31   3                      }
+  32   2                      if(time_flag)
+  33   2                              time0_start();//开始计时
+  34   2                      else
+  35   2                              time0_stop();//停止计时
+  36   2                  
+  37   2                      time_buf[0]=gsmg_code[ghoure/10];
+  38   2                      time_buf[1]=gsmg_code[ghoure%10];//小时
+  39   2                      time_buf[3]=gsmg_code[gmin/10];
+  40   2                      time_buf[4]=gsmg_code[gmin%10];//分
+  41   2                      time_buf[2]=0x40;//-
+  42   2                      time_buf[6]=gsmg_code[gsec/10];
+  43   2                      time_buf[7]=gsmg_code[gsec%10];//秒
+  44   2                      time_buf[5]=0x40;//-
+  45   2                      //time_buf[6]=gsmg_code[gmsec/10];
+  46   2                      //time_buf[7]=gsmg_code[gmsec%10];//毫秒
+  47   2                      smg_display(time_buf,1);//显示
+  48   2              
+  49   2              }
+  50   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    175    ----
+C51 COMPILER V9.60.7.0   MAIN                                                              04/14/2023 11:19:01 PAGE 2   
+
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

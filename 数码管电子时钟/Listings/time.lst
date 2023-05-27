@@ -1,0 +1,102 @@
+C51 COMPILER V9.60.7.0   TIME                                                              04/14/2023 11:19:01 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIME
+OBJECT MODULE PLACED IN .\Objects\time.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE time.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\time.lst) OBJECT(.\Objects\time.obj)
+
+line level    source
+
+   1          #include "time.h"
+   2          #include "beep.h"
+   3          #include "pubil.h"
+*** WARNING C318 IN LINE 3 OF time.c: can't open file 'pubil.h'
+   4          //变量定义
+   5          u8 gmsec=0;//ms级定义
+   6          u8 gsec=0;//秒定义
+   7          u8 gmin=0;//分定义
+   8          u8 ghoure=0;//小时定义
+   9          
+  10          /*******************************************************************************
+  11          * 函 数 名       : time0_init
+  12          * 函数功能               : 定时器0中断配置函数，通过设置TH和TL即可确定定时时间
+  13          * 输    入       : 无
+  14          * 输    出       : 无
+  15          *******************************************************************************/
+  16          void time0_init(void)
+  17          {
+  18   1              TMOD|=0X01;//选择为定时器0模式，工作方式1
+  19   1              TH0=0XDC;       //给定时器赋初值，定时10ms
+  20   1              TL0=0X00;       
+  21   1              ET0=1;//打开定时器0中断允许
+  22   1              EA=1;//打开总中断
+  23   1              TR0=0;//关闭定时器              
+  24   1      }
+  25          
+  26          /*******************************************************************************
+  27          * 函 数 名       : time0_start
+  28          * 函数功能               : 定时器0打开
+  29          * 输    入       : 无
+  30          * 输    出       : 无
+  31          *******************************************************************************/
+  32          void time0_start(void)
+  33          {
+  34   1              TR0=1;//打开定时器      
+  35   1      }
+  36          
+  37          /*******************************************************************************
+  38          * 函 数 名       : time0_stop
+  39          * 函数功能               : 定时器0关闭
+  40          * 输    入       : 无
+  41          * 输    出       : 无
+  42          *******************************************************************************/
+  43          void time0_stop(void)
+  44          {
+  45   1              TR0=0;//关闭定时器
+  46   1              TH0=0X00;
+  47   1              TL0=0X00;       
+  48   1      }
+  49          
+  50          void time0() interrupt 1 //定时器0中断函数
+  51          {
+  52   1              TH0=0XDC;       //给定时器赋初值，定时10ms
+  53   1              TL0=0X00;
+C51 COMPILER V9.60.7.0   TIME                                                              04/14/2023 11:19:01 PAGE 2   
+
+  54   1      
+  55   1              gmsec++;//10ms加1次
+  56   1              if(gmsec==100)//定时1秒
+  57   1              {
+  58   2                      gmsec=0;
+  59   2                      gsec++;//对秒计数
+  60   2                      if(gsec==60)//到达60秒，即1分钟
+  61   2                      {
+  62   3                              gsec=0;
+  63   3                  gmin++;//对分计数
+  64   3                              if(gmin==60)//六十分钟
+  65   3                  {
+  66   4                      gmin=0;
+  67   4                      ghoure++;
+  68   4                      if(ghoure==24)
+  69   4                      {                                
+  70   5                          gmsec=0;gsec=0;gmin=0;ghoure=0;//若满24小时，清零  
+  71   5                      }
+  72   4                  }
+  73   3                      }       
+  74   2              }                                       
+  75   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     91    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)
