@@ -1,0 +1,17 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\51单片机\LED数码管动态显示\project.uvproj
+Project File Date:  03/04/2023
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+--- Error: failed to execute 'D:\51单片机资料\C51\BIN\C51.EXE'
+Target not created
+Build target 'Target 1'
+compiling main.c...
+--- Error: failed to execute 'D:\51单片机资料\C51\BIN\C51.EXE'
+Target not created
