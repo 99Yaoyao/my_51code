@@ -1,0 +1,258 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/06/2023  21:39:46  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL5 C51\C51\BIN\BL51.EXE .\Objects\main.obj, .\Objects\Delay.obj, .\Objects\LEDMatrix.obj, .\Objects\Timer0.obj, .\
+>> Objects\main1.obj TO .\Objects\project PRINT (.\Listings\project.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\main.obj (MAIN)
+  .\Objects\Delay.obj (DELAY)
+  .\Objects\LEDMatrix.obj (LEDMATRIX)
+  .\Objects\Timer0.obj (TIMER0)
+  .\Objects\main1.obj (MAIN1)
+  E:\KEIL5 C51\C51\LIB\C51S.LIB (?C_STARTUP)
+  E:\KEIL5 C51\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\project (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0003H     UNIT         ?DT?MAIN1
+            DATA    000BH     0001H     UNIT         _DATA_GROUP_
+            IDATA   000CH     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0008H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+                    000EH     07F2H                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0031H     UNIT         ?PR?TIMER0_ROUTINE?MAIN1
+            CODE    08BDH     0030H     UNIT         ?CO?MAIN1
+            CODE    08EDH     002DH     UNIT         ?PR?__74HC595_WRITEBYTE2?LEDMATRIX
+            CODE    091AH     0025H     UNIT         ?PR?MAIN?MAIN1
+            CODE    093FH     0024H     UNIT         ?PR?_LEDJUZHEN_SHOWGRAPH?LEDMATRIX
+            CODE    0963H     001AH     UNIT         ?PR?_DELAY?DELAY
+            CODE    097DH     0017H     UNIT         ?PR?TIMER0_INIT?TIMER0
+            CODE    0994H     0005H     UNIT         ?PR?DELAY10US?DELAY
+            CODE    0999H     0005H     UNIT         ?PR?LEDMATRIX_INIT?LEDMATRIX
+            CODE    099EH     0004H     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\project (MAIN)
+
+
+SEGMENT                                      DATA_GROUP 
+  +--> CALLED SEGMENT                      START    LENGTH
+----------------------------------------------------------
+?C_C51STARTUP                              -----    -----
+  +--> ?PR?MAIN?MAIN1
+  +--> ?C_INITSEG
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/06/2023  21:39:46  PAGE 2
+
+
+
+?PR?MAIN?MAIN1                             000BH    0001H
+  +--> ?PR?LEDMATRIX_INIT?LEDMATRIX
+  +--> ?PR?TIMER0_INIT?TIMER0
+  +--> ?CO?MAIN1
+  +--> ?PR?_LEDJUZHEN_SHOWGRAPH?LEDMATRIX
+
+?PR?_LEDJUZHEN_SHOWGRAPH?LEDMATRIX         -----    -----
+  +--> ?PR?__74HC595_WRITEBYTE2?LEDMATRIX
+  +--> ?PR?_DELAY?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\project (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0994H         PUBLIC        Delay10us
+  C:0963H         PUBLIC        _Delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0004H         SYMBOL        k
+  D:0001H         SYMBOL        i
+  D:0003H         SYMBOL        j
+  -------         ENDDO         
+  C:0963H         LINE#         3
+  C:0963H         LINE#         4
+  C:0963H         LINE#         5
+  C:0966H         LINE#         7
+  C:096DH         LINE#         8
+  C:096DH         LINE#         9
+  C:096FH         LINE#         10
+  C:0971H         LINE#         12
+  C:0971H         LINE#         13
+  C:0973H         LINE#         14
+  C:0975H         LINE#         15
+  C:097CH         LINE#         16
+  -------         ENDPROC       _DELAY
+  -------         PROC          DELAY10US
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:0994H         LINE#         18
+  C:0994H         LINE#         19
+  C:0994H         LINE#         23
+  C:0996H         LINE#         24
+  C:0998H         LINE#         25
+  -------         ENDPROC       DELAY10US
+  -------         ENDMOD        DELAY
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/06/2023  21:39:46  PAGE 3
+
+
+
+  -------         MODULE        LEDMATRIX
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:00B0H         PUBLIC        P3
+  C:08EDH         PUBLIC        __74HC595_WriteByte2
+  C:0999H         PUBLIC        LEDMatrix_Init
+  B:00B0H.5       PUBLIC        RCK
+  B:00B0H.6       PUBLIC        SCK
+  C:093FH         PUBLIC        _LEDjuzhen_ShowGraph
+  B:00B0H.4       PUBLIC        SER
+  -------         PROC          LEDMATRIX_INIT
+  C:0999H         LINE#         43
+  C:0999H         LINE#         44
+  C:0999H         LINE#         45
+  C:099BH         LINE#         46
+  C:099DH         LINE#         47
+  -------         ENDPROC       LEDMATRIX_INIT
+  -------         PROC          __74HC595_WRITEBYTE2
+  D:0005H         SYMBOL        byte
+  -------         DO            
+  D:0003H         SYMBOL        i
+  -------         ENDDO         
+  C:08EDH         LINE#         49
+  C:08EFH         LINE#         50
+  C:08EFH         LINE#         51
+  C:08F1H         LINE#         52
+  C:08F1H         LINE#         53
+  C:08F1H         LINE#         54
+  C:090DH         LINE#         55
+  C:090FH         LINE#         56
+  C:0911H         LINE#         57
+  C:0915H         LINE#         58
+  C:0917H         LINE#         59
+  C:0919H         LINE#         60
+  -------         ENDPROC       __74HC595_WRITEBYTE2
+  -------         PROC          _LEDJUZHEN_SHOWGRAPH
+  D:0004H         SYMBOL        col
+  D:0006H         SYMBOL        dat
+  C:093FH         LINE#         62
+  C:0943H         LINE#         63
+  C:0943H         LINE#         64
+  C:0948H         LINE#         65
+  C:0958H         LINE#         66
+  C:095FH         LINE#         67
+  C:0962H         LINE#         68
+  -------         ENDPROC       _LEDJUZHEN_SHOWGRAPH
+  -------         ENDMOD        LEDMATRIX
+
+  -------         MODULE        TIMER0
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  C:097DH         PUBLIC        Timer0_Init
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/06/2023  21:39:46  PAGE 4
+
+
+  D:008AH         PUBLIC        TL0
+  B:00B8H.1       PUBLIC        PT0
+  B:0088H.4       PUBLIC        TR0
+  -------         PROC          TIMER0_INIT
+  C:097DH         LINE#         3
+  C:097DH         LINE#         4
+  C:097DH         LINE#         5
+  C:0980H         LINE#         6
+  C:0983H         LINE#         7
+  C:0986H         LINE#         8
+  C:0989H         LINE#         9
+  C:098BH         LINE#         10
+  C:098DH         LINE#         11
+  C:098FH         LINE#         12
+  C:0991H         LINE#         13
+  C:0993H         LINE#         22
+  -------         ENDPROC       TIMER0_INIT
+  -------         ENDMOD        TIMER0
+
+  -------         MODULE        MAIN1
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:088CH         PUBLIC        Timer0_Routine
+  D:000AH         PUBLIC        offset
+  C:091AH         PUBLIC        main
+  C:08BDH         PUBLIC        ch
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  -------         PROC          MAIN
+  -------         DO            
+  D:000BH         SYMBOL        i
+  -------         ENDDO         
+  C:091AH         LINE#         16
+  C:091AH         LINE#         17
+  C:091AH         LINE#         18
+  C:091DH         LINE#         19
+  C:0920H         LINE#         20
+  C:0923H         LINE#         21
+  C:0923H         LINE#         22
+  C:0923H         LINE#         23
+  C:0926H         LINE#         24
+  C:0926H         LINE#         25
+  C:0934H         LINE#         26
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0_ROUTINE
+  -------         DO            
+  D:0008H         SYMBOL        T0Count
+  -------         ENDDO         
+  C:088CH         LINE#         31
+  C:0890H         LINE#         34
+  C:0893H         LINE#         35
+  C:0896H         LINE#         36
+  C:089EH         LINE#         37
+  C:08A6H         LINE#         38
+  C:08A6H         LINE#         39
+  C:08ACH         LINE#         40
+  C:08AFH         LINE#         41
+  C:08B2H         LINE#         42
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/06/2023  21:39:46  PAGE 5
+
+
+  C:08B8H         LINE#         43
+  C:08B8H         LINE#         44
+  -------         ENDPROC       TIMER0_ROUTINE
+  -------         ENDMOD        MAIN1
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DELAY10US?DELAY
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0118H BYTE (13%) *
+******************************************************************************
+
+Program Size: data=13.0 xdata=0 code=424
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

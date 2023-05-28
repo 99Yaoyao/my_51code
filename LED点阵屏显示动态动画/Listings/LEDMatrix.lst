@@ -1,0 +1,94 @@
+C51 COMPILER V9.54   LEDMATRIX                                                             01/06/2023 21:39:46 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE LEDMATRIX
+OBJECT MODULE PLACED IN .\Objects\LEDMatrix.obj
+COMPILER INVOKED BY: E:\Keil5 C51\C51\BIN\C51.EXE LEDMatrix.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\LEDMatrix.lst) OBJECT(.\Objects\LEDMatrix.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Delay.h"
+   3          
+   4          sbit RCK = P3^5;//不能用P3_5,P3^5意思是P3的第五位。sbit类似typedef
+   5                          //在regx52中P3_5已经被声明地址为0xB5，所以RCK就可以被赋值为P3^5
+   6          sbit SCK = P3^6;
+   7          sbit SER = P3^4; 
+   8          //RCK给1是数据全部发送，SCK给1是向下压一位，SER是保存1bit数据的位
+   9          /*
+  10          void _74HC595_WriteByte(u8 byte)
+  11          {
+  12              u8 count = 0;
+  13              while(byte!=0 || count < 8)
+  14              {
+  15                  SER = byte & 0x80;//byte与上0x80，要么是0要么是非0既是1,按位与
+  16                  SCK = 1;
+  17                  SCK = 0;
+  18                  byte = byte << 1;
+  19                  count++;
+  20              }
+  21              RCK = 1;
+  22              RCK = 0;
+  23          }
+  24          */
+  25          /*
+  26          void _74HC595_WriteByte1(u8 byte)
+  27          {
+  28              u8 i = 0;
+  29              u8 tmp = byte;
+  30              for(;i<8;i++)
+  31              {
+  32                  byte = byte<<i;
+  33                  SER = byte & 0x80;//byte与上0x80，要么是0要么是非0既是1,按位与
+  34                  SCK = 1;
+  35                  SCK = 0;
+  36                  byte = tmp;
+  37              }
+  38              RCK = 1;
+  39              RCK = 0;
+  40          }
+  41          */
+  42          
+  43          void LEDMatrix_Init()//点阵屏初始化
+  44          {
+  45   1          SCK = 0;
+  46   1          RCK = 0;
+  47   1      }
+  48          
+  49          void _74HC595_WriteByte2(u8 byte)//控制行的高低电平
+  50          {
+  51   1          u8 i = 0;
+  52   1          for(;i<8;i++)
+  53   1          {
+  54   2              SER = byte & (0x80>>i);
+C51 COMPILER V9.54   LEDMATRIX                                                             01/06/2023 21:39:46 PAGE 2   
+
+  55   2              SCK = 1;
+  56   2              SCK = 0;
+  57   2          }
+  58   1          RCK = 1;
+  59   1          RCK = 0;
+  60   1      }
+  61          
+  62          void LEDjuzhen_ShowGraph(u8 col, u8 dat)//控制列的高低电平
+  63          {
+  64   1          _74HC595_WriteByte2(dat);
+  65   1          P0 = ~(0x80>>col);
+  66   1          Delay(1);
+  67   1          P0 = 0xFF;
+  68   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     86    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

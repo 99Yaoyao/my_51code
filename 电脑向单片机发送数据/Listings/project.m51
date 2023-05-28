@@ -1,0 +1,215 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/05/2023  18:22:03  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL5 C51\C51\BIN\BL51.EXE .\Objects\Delay.obj, .\Objects\main.obj, .\Objects\Timer0.obj, .\Objects\UART.obj TO .\Obj
+>> ects\project PRINT (.\Listings\project.m51) RAMSIZE (256) DISABLEWARNING (16)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\Delay.obj (DELAY)
+  .\Objects\main.obj (MAIN)
+  .\Objects\Timer0.obj (TIMER0)
+  .\Objects\UART.obj (UART)
+  E:\KEIL5 C51\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\project (DELAY)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     0020H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+                    0026H     07DAH                  *** GAP ***
+            CODE    0800H     0047H     UNIT         ?PR?UART_ROUTINE?MAIN
+            CODE    0847H     001BH     UNIT         ?PR?UART_INIT?UART
+            CODE    0862H     001AH     UNIT         ?PR?_DELAY?DELAY
+            CODE    087CH     0017H     UNIT         ?PR?TIMER0_INIT?TIMER0
+            CODE    0893H     000CH     UNIT         ?C_C51STARTUP
+            CODE    089FH     0008H     UNIT         ?PR?_UART_SENDBYTE?UART
+            CODE    08A7H     0005H     UNIT         ?PR?DELAY10US?DELAY
+            CODE    08ACH     0005H     UNIT         ?PR?MAIN?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\project (DELAY)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?PR?UART_ROUTINE?MAIN
+  +--> ?PR?_UART_SENDBYTE?UART
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?UART_INIT?UART
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/05/2023  18:22:03  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\project (DELAY)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:08A7H         PUBLIC        Delay10us
+  C:0862H         PUBLIC        _Delay
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0004H         SYMBOL        k
+  D:0001H         SYMBOL        i
+  D:0003H         SYMBOL        j
+  -------         ENDDO         
+  C:0862H         LINE#         3
+  C:0862H         LINE#         4
+  C:0862H         LINE#         5
+  C:0865H         LINE#         7
+  C:086CH         LINE#         8
+  C:086CH         LINE#         9
+  C:086EH         LINE#         10
+  C:0870H         LINE#         12
+  C:0870H         LINE#         13
+  C:0872H         LINE#         14
+  C:0874H         LINE#         15
+  C:087BH         LINE#         16
+  -------         ENDPROC       _DELAY
+  -------         PROC          DELAY10US
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:08A7H         LINE#         18
+  C:08A7H         LINE#         19
+  C:08A7H         LINE#         23
+  C:08A9H         LINE#         24
+  C:08ABH         LINE#         25
+  -------         ENDPROC       DELAY10US
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00A0H         PUBLIC        P2
+  C:0800H         PUBLIC        UART_Routine
+  B:0098H.0       PUBLIC        RI
+  C:08ACH         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  -------         PROC          MAIN
+  C:08ACH         LINE#         5
+  C:08ACH         LINE#         6
+  C:08ACH         LINE#         7
+  C:08AFH         LINE#         8
+  C:08AFH         LINE#         9
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/05/2023  18:22:03  PAGE 3
+
+
+  C:08AFH         LINE#         11
+  -------         ENDPROC       MAIN
+  -------         PROC          UART_ROUTINE
+  C:0800H         LINE#         16
+  C:081DH         LINE#         18
+  C:0820H         LINE#         19
+  C:0820H         LINE#         20
+  C:0825H         LINE#         21
+  C:082AH         LINE#         22
+  C:082CH         LINE#         23
+  C:082CH         LINE#         24
+  -------         ENDPROC       UART_ROUTINE
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        TIMER0
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  C:087CH         PUBLIC        Timer0_Init
+  D:0089H         PUBLIC        TMOD
+  B:00A8H.1       PUBLIC        ET0
+  B:0088H.5       PUBLIC        TF0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  B:00B8H.1       PUBLIC        PT0
+  B:0088H.4       PUBLIC        TR0
+  -------         PROC          TIMER0_INIT
+  C:087CH         LINE#         3
+  C:087CH         LINE#         4
+  C:087CH         LINE#         5
+  C:087FH         LINE#         6
+  C:0882H         LINE#         7
+  C:0885H         LINE#         8
+  C:0888H         LINE#         9
+  C:088AH         LINE#         10
+  C:088CH         LINE#         11
+  C:088EH         LINE#         12
+  C:0890H         LINE#         13
+  C:0892H         LINE#         22
+  -------         ENDPROC       TIMER0_INIT
+  -------         ENDMOD        TIMER0
+
+  -------         MODULE        UART
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A8H.7       PUBLIC        EA
+  B:00A8H.4       PUBLIC        ES
+  B:0098H.1       PUBLIC        TI
+  D:0099H         PUBLIC        SBUF
+  D:0087H         PUBLIC        PCON
+  C:0847H         PUBLIC        UART_Init
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  C:089FH         PUBLIC        _UART_SendByte
+  B:00A8H.3       PUBLIC        ET1
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  B:0088H.6       PUBLIC        TR1
+  -------         PROC          UART_INIT
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/05/2023  18:22:03  PAGE 4
+
+
+  C:0847H         LINE#         3
+  C:0847H         LINE#         4
+  C:0847H         LINE#         5
+  C:084AH         LINE#         6
+  C:084DH         LINE#         8
+  C:0850H         LINE#         9
+  C:0853H         LINE#         10
+  C:0856H         LINE#         11
+  C:0859H         LINE#         12
+  C:085BH         LINE#         13
+  C:085DH         LINE#         14
+  C:085FH         LINE#         15
+  C:0861H         LINE#         16
+  -------         ENDPROC       UART_INIT
+  -------         PROC          _UART_SENDBYTE
+  D:0007H         SYMBOL        byte
+  C:089FH         LINE#         18
+  C:089FH         LINE#         19
+  C:089FH         LINE#         20
+  C:08A1H         LINE#         21
+  C:08A4H         LINE#         22
+  C:08A6H         LINE#         23
+  -------         ENDPROC       _UART_SENDBYTE
+  -------         ENDMOD        UART
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00A8H BYTE ( 8%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=183
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
