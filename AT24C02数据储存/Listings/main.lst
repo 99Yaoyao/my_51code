@@ -1,0 +1,84 @@
+C51 COMPILER V9.54   MAIN                                                                  01/13/2023 19:22:50 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\Keil5 C51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\ma
+                    -in.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "key.h"
+   3          #include "Delay.h"
+   4          #include "LCD1602.h"
+   5          #include "AT24C02.h"
+   6          u8 KeyNum;
+   7          u16 Num; 
+   8          
+   9          int main(void)
+  10          {
+  11   1          /*LCD_Init();
+  12   1          AT24C02_write(1,255);//1地址写入1byte数据
+  13   1          AT24C02_write(2,255);//2地址写入1byte数据，可以直接用数字做地址是因为
+  14   1          Delay(10);           //24C02有256个字节的空间大小，就是256*8=2048bit  
+  15   1          est = AT24C02_read(1);
+  16   1          LCD_ShowNum(1,1,est,4);*/
+  17   1          LCD_Init();
+  18   1          LCD_ShowNum(1,1,0,5);
+  19   1              for(;;)
+  20   1              {
+  21   2              KeyNum = Key();
+*** WARNING C206 IN LINE 21 OF main.c: 'Key': missing function-prototype
+  22   2              if(KeyNum==1)
+  23   2              {
+  24   3                  Num++;
+  25   3                  LCD_ShowNum(1,1,Num,5);
+  26   3              }
+  27   2              if(KeyNum==2)
+  28   2              {
+  29   3                  Num--;
+  30   3                  LCD_ShowNum(1,1,Num,5);
+  31   3              }
+  32   2              if(KeyNum==3)
+  33   2              {
+  34   3                  AT24C02_write(1,Num/256);//高八位
+  35   3                  Delay(5);//写入有时间要求，勿忘！！
+  36   3                  AT24C02_write(2,Num%256);//低八位
+  37   3                  Delay(5);
+  38   3                  LCD_ShowNum(1,1,Num,5);
+  39   3                  LCD_ShowString(2,1,"Write OK");
+  40   3                  Delay(1000);
+  41   3                  LCD_ShowString(2,1,"        ");
+  42   3              }
+  43   2              if(KeyNum==4)
+  44   2              {
+  45   3                  Num |= AT24C02_read(1) << 8;//把高八位左移八位（超出范围后数据不会销毁，�
+             -��是往更高位移）后按位或上Num
+  46   3                  Num |= AT24C02_read(2);//不能直接赋值，也要按位或上低八位，如果这句写在
+             -前面就不用或
+  47   3                  LCD_ShowNum(1,1,Num,5);
+  48   3                  LCD_ShowString(2,1,"Read OK");
+  49   3                  Delay(1000);
+  50   3                  LCD_ShowString(2,1,"       ");
+  51   3              }
+C51 COMPILER V9.54   MAIN                                                                  01/13/2023 19:22:50 PAGE 2   
+
+  52   2              }
+  53   1              return 0;
+  54   1      }
+*** WARNING C294 IN LINE 53 OF main.c: unreachable code
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    234    ----
+   CONSTANT SIZE    =     34    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)

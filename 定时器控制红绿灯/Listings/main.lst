@@ -1,0 +1,84 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              03/05/2023 10:42:21 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: D:\51单片机资料\新建文件夹\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT
+                    -(.\Listings\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Timer0.h"
+   3          #include "Delay.h"
+   4          //P2_0瀹氫箟涓轰笢瑗垮悜缁跨伅
+   5          //P2_1瀹氫箟涓轰笢瑗垮悜绾㈢伅
+   6          //P2_2瀹氫箟涓轰笢瑗垮悜榛勭伅
+   7          
+   8          //P2_3瀹氫箟涓哄崡鍖楀悜缁跨伅
+   9          //P2_4瀹氫箟涓哄崡鍖楀悜绾㈢伅
+  10          //P2_5瀹氫箟涓哄崡鍖楀悜榛勭伅
+  11          u8 Count;
+*** ERROR C129 IN LINE 11 OF main.c: missing ';' before 'Count'
+  12          u8 YLED;
+  13          sfr DXLV = P2;
+  14          int main(void)
+  15          {
+  16            Timer0_Init();
+  17              DXLV = 0;
+  18              P2_4 = 0;
+  19            for(;;)
+  20            {
+  21                  if(Count == 15)
+  22                  {
+  23                      P2_0 = 1;    
+  24                      for(;Count < 20;)
+  25                      {              
+  26                          P2_2 = ~P2_2;
+  27                          Delay(500);
+  28                      }
+  29                  }
+  30                  if(Count == 20)
+  31                  {
+  32                      P2_2 = 1;
+  33                      P2_1 = 0;
+  34                      P2_4 = 1;
+  35                      P2_3 = 0;
+  36                  }
+  37                  if(Count == 35)
+  38                  {
+  39                      P2_3 = 1;
+  40                      for(;Count < 40;)
+  41                      {
+  42                          P2_5 = ~P2_5;
+  43                          Delay(500);
+  44                      }
+  45                      P2_5 = 1;
+  46                  }
+  47                  if(Count == 40)
+  48                  {
+  49                      P2_0 = 0;
+  50                      P2_1 = 1;
+  51                      P2_4 = 0;
+  52                      Count = 0;
+  53                  }
+C51 COMPILER V9.60.7.0   MAIN                                                              03/05/2023 10:42:21 PAGE 2   
+
+  54            }
+  55            return 0;
+  56          }
+  57          
+  58          void Timer0_Routine() interrupt 1
+  59          {
+  60              static unsigned int T0Count;
+  61            TL0 = 0x66;       
+  62            TH0 = 0xFC;
+  63              T0Count++;
+  64              if(T0Count==1000)
+  65              {
+  66                  Count++;
+  67                  T0Count = 0;
+  68              }
+  69          }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)
