@@ -1,0 +1,153 @@
+C51 COMPILER V9.60.7.0   TIMER_KEY                                                         03/05/2023 19:04:45 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMER_KEY
+OBJECT MODULE PLACED IN .\Objects\Timer_key.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE Timer_key.c OPTIMIZE(8,SPEED) BROWSE INCDIR(E:\keil5_MDKorC51\C51
+                    -\INC\Atmel) DEBUG OBJECTEXTEND PRINT(.\Listings\Timer_key.lst) OBJECT(.\Objects\Timer_key.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Delay.h"
+*** ERROR C231 IN LINE 13 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'P0': redefinition
+*** ERROR C231 IN LINE 14 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'P1': redefinition
+*** ERROR C231 IN LINE 15 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'P2': redefinition
+*** ERROR C231 IN LINE 16 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'P3': redefinition
+*** ERROR C231 IN LINE 17 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PSW': redefinition
+*** ERROR C231 IN LINE 18 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'ACC': redefinition
+*** ERROR C231 IN LINE 19 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'B': redefinition
+*** ERROR C231 IN LINE 20 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'SP': redefinition
+*** ERROR C231 IN LINE 21 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'DPL': redefinition
+*** ERROR C231 IN LINE 22 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'DPH': redefinition
+*** ERROR C231 IN LINE 23 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PCON': redefinition
+*** ERROR C231 IN LINE 24 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TCON': redefinition
+*** ERROR C231 IN LINE 25 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TMOD': redefinition
+*** ERROR C231 IN LINE 26 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TL0': redefinition
+*** ERROR C231 IN LINE 27 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TL1': redefinition
+*** ERROR C231 IN LINE 28 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TH0': redefinition
+*** ERROR C231 IN LINE 29 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TH1': redefinition
+*** ERROR C231 IN LINE 30 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'IE': redefinition
+*** ERROR C231 IN LINE 31 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'IP': redefinition
+*** ERROR C231 IN LINE 32 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'SCON': redefinition
+*** ERROR C231 IN LINE 33 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'SBUF': redefinition
+*** ERROR C231 IN LINE 36 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'T2CON': redefinition
+*** ERROR C231 IN LINE 37 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RCAP2L': redefinition
+*** ERROR C231 IN LINE 38 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RCAP2H': redefinition
+*** ERROR C231 IN LINE 39 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TL2': redefinition
+*** ERROR C231 IN LINE 40 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TH2': redefinition
+*** ERROR C231 IN LINE 45 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'CY': redefinition
+*** ERROR C231 IN LINE 46 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'AC': redefinition
+*** ERROR C231 IN LINE 47 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'F0': redefinition
+*** ERROR C231 IN LINE 48 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RS1': redefinition
+*** ERROR C231 IN LINE 49 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RS0': redefinition
+*** ERROR C231 IN LINE 50 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'OV': redefinition
+*** ERROR C231 IN LINE 51 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'P': redefinition
+*** ERROR C231 IN LINE 54 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TF1': redefinition
+*** ERROR C231 IN LINE 55 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TR1': redefinition
+*** ERROR C231 IN LINE 56 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TF0': redefinition
+*** ERROR C231 IN LINE 57 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TR0': redefinition
+*** ERROR C231 IN LINE 58 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'IE1': redefinition
+*** ERROR C231 IN LINE 59 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'IT1': redefinition
+*** ERROR C231 IN LINE 60 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'IE0': redefinition
+*** ERROR C231 IN LINE 61 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'IT0': redefinition
+*** ERROR C231 IN LINE 64 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'EA': redefinition
+*** ERROR C231 IN LINE 65 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'ET2': redefinition
+*** ERROR C231 IN LINE 66 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'ES': redefinition
+*** ERROR C231 IN LINE 67 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'ET1': redefinition
+*** ERROR C231 IN LINE 68 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'EX1': redefinition
+*** ERROR C231 IN LINE 69 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'ET0': redefinition
+*** ERROR C231 IN LINE 70 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'EX0': redefinition
+*** ERROR C231 IN LINE 73 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PT2': redefinition
+*** ERROR C231 IN LINE 74 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PS': redefinition
+*** ERROR C231 IN LINE 75 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PT1': redefinition
+*** ERROR C231 IN LINE 76 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PX1': redefinition
+C51 COMPILER V9.60.7.0   TIMER_KEY                                                         03/05/2023 19:04:45 PAGE 2   
+
+*** ERROR C231 IN LINE 77 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PT0': redefinition
+*** ERROR C231 IN LINE 78 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'PX0': redefinition
+*** ERROR C231 IN LINE 81 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RD': redefinition
+*** ERROR C231 IN LINE 82 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'WR': redefinition
+*** ERROR C231 IN LINE 83 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'T1': redefinition
+*** ERROR C231 IN LINE 84 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'T0': redefinition
+*** ERROR C231 IN LINE 85 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'INT1': redefinition
+*** ERROR C231 IN LINE 86 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'INT0': redefinition
+*** ERROR C231 IN LINE 87 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TXD': redefinition
+*** ERROR C231 IN LINE 88 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RXD': redefinition
+*** ERROR C231 IN LINE 91 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'SM0': redefinition
+*** ERROR C231 IN LINE 92 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'SM1': redefinition
+*** ERROR C231 IN LINE 93 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'SM2': redefinition
+*** ERROR C231 IN LINE 94 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'REN': redefinition
+*** ERROR C231 IN LINE 95 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TB8': redefinition
+*** ERROR C231 IN LINE 96 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RB8': redefinition
+*** ERROR C231 IN LINE 97 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TI': redefinition
+*** ERROR C231 IN LINE 98 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RI': redefinition
+*** ERROR C231 IN LINE 101 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'T2EX': redefinition
+*** ERROR C231 IN LINE 102 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'T2': redefinition
+*** ERROR C231 IN LINE 105 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TF2': redefinition
+*** ERROR C231 IN LINE 106 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'EXF2': redefinition
+*** ERROR C231 IN LINE 107 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'RCLK': redefinition
+*** ERROR C231 IN LINE 108 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TCLK': redefinition
+*** ERROR C231 IN LINE 109 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'EXEN2': redefinition
+*** ERROR C231 IN LINE 110 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'TR2': redefinition
+*** ERROR C231 IN LINE 111 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'C_T2': redefinition
+*** ERROR C231 IN LINE 112 OF E:\keil5_MDKorC51\C51\Inc\reg52.h: 'CP_RL2': redefinition
+   3          #include "public.h"
+   4          /*
+   5          unsigned char key()//获取独立按键键码
+   6          {
+   7              unsigned char KeyNumber = 0;
+   8              
+   9              if(P3_1 == 0){Delay(20); while(P3_1 == 0); Delay(20); KeyNumber = 1;}
+  10              if(P3_0 == 0){Delay(20); while(P3_0 == 0); Delay(20); KeyNumber = 2;}
+  11              if(P3_2 == 0){Delay(20); while(P3_2 == 0); Delay(20); KeyNumber = 3;}
+  12              if(P3_3 == 0){Delay(20); while(P3_3 == 0); Delay(20); KeyNumber = 4;}
+  13              
+  14              return KeyNumber;
+  15          }
+  16          */
+  17          u8 Global_Key;
+  18          unsigned char not_delay_key()//获取独立按键键码
+  19          {
+  20   1          unsigned char KeyNumber = 0;
+  21   1          
+  22   1          if(P3_1 == 0){KeyNumber = 1;}
+  23   1          if(P3_0 == 0){KeyNumber = 2;}
+  24   1          if(P3_2 == 0){KeyNumber = 3;}
+  25   1          if(P3_3 == 0){KeyNumber = 4;}
+  26   1          
+  27   1          return KeyNumber;
+  28   1      }
+  29          void key_timer()//定时器在这个文件的分身
+  30          {
+  31   1          static u8 last;
+  32   1          static u8 now;
+  33   1          last = now;
+  34   1          now = not_delay_key();
+  35   1          if(last == 1 && now == 0)
+  36   1              Global_Key = 1;
+C51 COMPILER V9.60.7.0   TIMER_KEY                                                         03/05/2023 19:04:45 PAGE 3   
+
+  37   1          if(last == 2 && now == 0)
+  38   1              Global_Key = 2;
+  39   1          if(last == 3 && now == 0)
+  40   1              Global_Key = 3;
+  41   1          if(last == 4 && now == 0)
+  42   1              Global_Key = 4;
+  43   1      }
+  44          
+  45          u8 retmain_key()//返回主函数的值
+  46          {
+  47   1          u8 tmp = 0;
+  48   1          tmp = Global_Key;
+  49   1          Global_Key = 0;
+  50   1          return tmp;
+  51   1      }
+  52          
+  53          
+  54          
+  55          
+  56          
+  57          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  80 ERROR(S)

@@ -1,0 +1,151 @@
+C51 COMPILER V9.60.7.0   MIAN                                                              03/05/2023 19:04:45 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MIAN
+OBJECT MODULE PLACED IN .\Objects\mian.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE mian.c OPTIMIZE(8,SPEED) BROWSE INCDIR(E:\keil5_MDKorC51\C51\INC\
+                    -Atmel) DEBUG OBJECTEXTEND PRINT(.\Listings\mian.lst) OBJECT(.\Objects\mian.obj)
+
+line level    source
+
+   1          #include <REG52.H>
+   2          #include "Timer0.h"
+   3          #include "Timer_Key.h"
+   4          #include "Nixie.h"
+*** WARNING C318 IN LINE 4 OF mian.c: can't open file 'Nixie.h'
+   5          #include "Delay.h"
+   6          #include "AT24C02.h"
+   7          #include "beep.h"
+   8          #include "public.h"
+   9          
+  10          u8 KeyNum;
+  11          u8 Sec;
+  12          u8 Min;
+  13          u8 Minisec;
+  14          u8 KeyFlag;
+  15          int main(void)
+  16          {
+  17   1              Timer0_Init();
+  18   1              for(;;)
+  19   1              {
+  20   2              KeyNum = retmain_key();
+  21   2              if(KeyNum == 1)
+  22   2              {
+  23   3                  KeyFlag = ~KeyFlag;
+  24   3              }
+  25   2              if(KeyNum == 2)
+  26   2              {
+  27   3                  Sec = 0;
+  28   3                  Min = 0;
+  29   3                  Minisec = 0;
+  30   3              }
+  31   2              if(KeyNum == 3)
+  32   2              {
+  33   3                  beep_alarm(100,1);
+  34   3                  AT24C02_write(1,Min);
+  35   3                  Delay(5);
+  36   3                  AT24C02_write(2,Sec);
+  37   3                  Delay(5);
+  38   3                  AT24C02_write(3,Minisec);
+  39   3                  Delay(5);
+  40   3              }
+  41   2              if(KeyNum == 4)
+  42   2              {
+  43   3                  Min = AT24C02_read(1);
+  44   3                  Sec = AT24C02_read(2);
+  45   3                  Minisec = AT24C02_read(3);
+  46   3              }
+  47   2              set_buff(1,Min/10);
+*** WARNING C206 IN LINE 47 OF mian.c: 'set_buff': missing function-prototype
+*** ERROR C267 IN LINE 47 OF mian.c: 'set_buff': requires ANSI-style prototype
+  48   2              set_buff(2,Min%10);
+  49   2              set_buff(3,11);
+  50   2              set_buff(4,Sec/10);
+  51   2              set_buff(5,Sec%10);
+C51 COMPILER V9.60.7.0   MIAN                                                              03/05/2023 19:04:45 PAGE 2   
+
+  52   2              set_buff(6,11);
+  53   2              set_buff(7,Minisec/10);
+  54   2              set_buff(8,Minisec%10); 
+  55   2              }
+  56   1              return 0;
+  57   1      }
+  58          
+  59          void stopwatch()
+  60          {
+  61   1          if(KeyFlag)
+  62   1          {
+  63   2              Minisec++;
+  64   2              if(Minisec>=100)
+  65   2              {
+  66   3                  Minisec = 0;
+  67   3                  Sec++;
+  68   3                  if(Sec>=100)
+  69   3                  {
+  70   4                      Sec = 0;
+  71   4                      Min++;
+  72   4                      if(Min >= 60)
+  73   4                      {
+  74   5                          Min = 0;
+  75   5                      }
+  76   4                  }
+  77   3              }
+  78   2          }
+  79   1      }
+  80          
+  81          void Timer0_Routine() interrupt 1
+  82          {
+  83   1          static unsigned char T0Count;
+  84   1          static unsigned char T0Count1;
+  85   1          static unsigned char T0Count2;
+  86   1              TL0 = 0x66;                             
+  87   1              TH0 = 0xFC;
+  88   1          T0Count++;    
+  89   1          if(T0Count>=20)
+  90   1          {
+  91   2              key_timer();
+  92   2              T0Count = 0;
+  93   2          }
+  94   1          T0Count1++;
+  95   1          if(T0Count1>=2)
+  96   1          {
+  97   2              timer_nixie();
+  98   2              T0Count1 = 0;
+  99   2          }
+ 100   1          T0Count2++;
+ 101   1          if(T0Count2>=10)
+ 102   1          {
+ 103   2              T0Count2 = 0;
+ 104   2              stopwatch();
+ 105   2          }
+ 106   1      }
+ 107          /*
+ 108          void Timer0_Routine() interrupt 1
+ 109          {
+ 110                  static unsigned int T0Count1,T0Count2,T0Count3;
+ 111                  TL0 = 0x18;             //设置定时初值
+ 112                  TH0 = 0xFC;             //设置定时初值
+ 113                  T0Count1++;
+C51 COMPILER V9.60.7.0   MIAN                                                              03/05/2023 19:04:45 PAGE 3   
+
+ 114                  if(T0Count1>=20)
+ 115                  {
+ 116                          T0Count1=0;
+ 117                          key_timer();    //20ms调用一次按键驱动函数
+ 118                  }
+ 119                  T0Count2++;
+ 120                  if(T0Count2>=2)
+ 121                  {
+ 122                          T0Count2=0;
+ 123                          timer_nixie();//2ms调用一次数码管驱动函数
+ 124                  }
+ 125                  T0Count3++;
+ 126                  if(T0Count3>=10)
+ 127                  {
+ 128                          T0Count3=0;
+ 129                          stopwatch();    //10ms调用一次数秒表驱动函数
+ 130                  }
+ 131          }
+ 132          */
+
+C51 COMPILATION COMPLETE.  2 WARNING(S),  1 ERROR(S)

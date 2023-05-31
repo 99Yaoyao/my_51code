@@ -1,0 +1,108 @@
+C51 COMPILER V9.60.7.0   BEEP                                                              03/05/2023 19:04:46 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE BEEP
+OBJECT MODULE PLACED IN .\Objects\beep.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE beep.c OPTIMIZE(8,SPEED) BROWSE INCDIR(E:\keil5_MDKorC51\C51\INC\
+                    -Atmel) DEBUG OBJECTEXTEND PRINT(.\Listings\beep.lst) OBJECT(.\Objects\beep.obj)
+
+line level    source
+
+   1          #include "beep.h"
+   2          #include "Delay.h"
+   3          #include <REGX52.H>
+*** ERROR C231 IN LINE 14 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'P0': redefinition
+*** ERROR C231 IN LINE 15 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'SP': redefinition
+*** ERROR C231 IN LINE 16 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'DPL': redefinition
+*** ERROR C231 IN LINE 17 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'DPH': redefinition
+*** ERROR C231 IN LINE 18 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PCON': redefinition
+*** ERROR C231 IN LINE 19 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TCON': redefinition
+*** ERROR C231 IN LINE 20 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TMOD': redefinition
+*** ERROR C231 IN LINE 21 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TL0': redefinition
+*** ERROR C231 IN LINE 22 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TL1': redefinition
+*** ERROR C231 IN LINE 23 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TH0': redefinition
+*** ERROR C231 IN LINE 24 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TH1': redefinition
+*** ERROR C231 IN LINE 25 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'P1': redefinition
+*** ERROR C231 IN LINE 26 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'SCON': redefinition
+*** ERROR C231 IN LINE 27 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'SBUF': redefinition
+*** ERROR C231 IN LINE 28 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'P2': redefinition
+*** ERROR C231 IN LINE 29 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'IE': redefinition
+*** ERROR C231 IN LINE 30 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'P3': redefinition
+*** ERROR C231 IN LINE 31 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'IP': redefinition
+*** ERROR C231 IN LINE 32 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'T2CON': redefinition
+*** ERROR C231 IN LINE 34 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RCAP2L': redefinition
+*** ERROR C231 IN LINE 35 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RCAP2H': redefinition
+*** ERROR C231 IN LINE 36 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TL2': redefinition
+*** ERROR C231 IN LINE 37 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TH2': redefinition
+*** ERROR C231 IN LINE 38 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PSW': redefinition
+*** ERROR C231 IN LINE 39 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'ACC': redefinition
+*** ERROR C231 IN LINE 40 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'B': redefinition
+*** ERROR C231 IN LINE 69 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'IT0': redefinition
+*** ERROR C231 IN LINE 70 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'IE0': redefinition
+*** ERROR C231 IN LINE 71 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'IT1': redefinition
+*** ERROR C231 IN LINE 72 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'IE1': redefinition
+*** ERROR C231 IN LINE 73 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TR0': redefinition
+*** ERROR C231 IN LINE 74 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TF0': redefinition
+*** ERROR C231 IN LINE 75 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TR1': redefinition
+*** ERROR C231 IN LINE 76 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TF1': redefinition
+*** ERROR C231 IN LINE 105 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'T2': redefinition
+*** ERROR C231 IN LINE 106 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'T2EX': redefinition
+*** ERROR C231 IN LINE 111 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RI': redefinition
+*** ERROR C231 IN LINE 112 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TI': redefinition
+*** ERROR C231 IN LINE 113 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RB8': redefinition
+*** ERROR C231 IN LINE 114 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TB8': redefinition
+*** ERROR C231 IN LINE 115 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'REN': redefinition
+*** ERROR C231 IN LINE 116 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'SM2': redefinition
+*** ERROR C231 IN LINE 117 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'SM1': redefinition
+*** ERROR C231 IN LINE 118 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'SM0': redefinition
+*** ERROR C231 IN LINE 135 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'EX0': redefinition
+*** ERROR C231 IN LINE 136 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'ET0': redefinition
+*** ERROR C231 IN LINE 137 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'EX1': redefinition
+*** ERROR C231 IN LINE 138 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'ET1': redefinition
+*** ERROR C231 IN LINE 139 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'ES': redefinition
+*** ERROR C231 IN LINE 140 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'ET2': redefinition
+*** ERROR C231 IN LINE 142 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'EA': redefinition
+C51 COMPILER V9.60.7.0   BEEP                                                              03/05/2023 19:04:46 PAGE 2   
+
+*** ERROR C231 IN LINE 156 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RXD': redefinition
+*** ERROR C231 IN LINE 157 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TXD': redefinition
+*** ERROR C231 IN LINE 158 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'INT0': redefinition
+*** ERROR C231 IN LINE 159 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'INT1': redefinition
+*** ERROR C231 IN LINE 160 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'T0': redefinition
+*** ERROR C231 IN LINE 161 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'T1': redefinition
+*** ERROR C231 IN LINE 162 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'WR': redefinition
+*** ERROR C231 IN LINE 163 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RD': redefinition
+*** ERROR C231 IN LINE 168 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PX0': redefinition
+*** ERROR C231 IN LINE 169 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PT0': redefinition
+*** ERROR C231 IN LINE 170 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PX1': redefinition
+*** ERROR C231 IN LINE 171 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PT1': redefinition
+*** ERROR C231 IN LINE 172 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PS': redefinition
+*** ERROR C231 IN LINE 173 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'PT2': redefinition
+*** ERROR C231 IN LINE 178 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'CP_RL2': redefinition
+*** ERROR C231 IN LINE 179 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'C_T2': redefinition
+*** ERROR C231 IN LINE 180 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TR2': redefinition
+*** ERROR C231 IN LINE 181 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'EXEN2': redefinition
+*** ERROR C231 IN LINE 182 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TCLK': redefinition
+*** ERROR C231 IN LINE 183 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RCLK': redefinition
+*** ERROR C231 IN LINE 184 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'EXF2': redefinition
+*** ERROR C231 IN LINE 185 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'TF2': redefinition
+*** ERROR C231 IN LINE 196 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'P': redefinition
+*** ERROR C231 IN LINE 198 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'OV': redefinition
+*** ERROR C231 IN LINE 199 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RS0': redefinition
+*** ERROR C231 IN LINE 200 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'RS1': redefinition
+*** ERROR C231 IN LINE 201 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'F0': redefinition
+*** ERROR C231 IN LINE 202 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'AC': redefinition
+*** ERROR C231 IN LINE 203 OF E:\keil5_MDKorC51\C51\INC\Atmel\REGX52.H: 'CY': redefinition
+   4          #include "public.h"
+   5          sbit BEEP=P2^5;
+   6          
+   7          void beep_alarm(unsigned int time,unsigned int fre)
+   8          {
+   9   1              while(time--)
+  10   1              {
+  11   2                      BEEP=!BEEP;
+  12   2                      Delay(fre);     
+  13   2              }               
+  14   1      }
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  80 ERROR(S)
