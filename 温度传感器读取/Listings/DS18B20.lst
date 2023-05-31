@@ -1,0 +1,59 @@
+C51 COMPILER V9.60.7.0   DS18B20                                                           03/05/2023 11:00:37 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE DS18B20
+OBJECT MODULE PLACED IN .\Objects\DS18B20.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE DS18B20.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Lis
+                    -tings\DS18B20.lst) TABS(2) OBJECT(.\Objects\DS18B20.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "wire.h"
+   3          #include "Delay.h"
+   4          
+   5          void DS18B20_convertT()
+   6          {
+   7   1          OneWire_Init();
+   8   1          OneWire_SendByte(0xCC);
+   9   1          OneWire_SendByte(0x44);
+  10   1      }
+  11          
+  12          float DS18B20_readT()
+  13          {
+  14   1          u8 TL = 0;
+*** ERROR C202 IN LINE 14 OF DS18B20.c: 'u8': undefined identifier
+*** ERROR C141 IN LINE 14 OF DS18B20.c: syntax error near 'TL', expected ';'
+  15   1          u8 TH = 0;
+*** ERROR C202 IN LINE 15 OF DS18B20.c: 'u8': undefined identifier
+*** ERROR C141 IN LINE 15 OF DS18B20.c: syntax error near 'TH', expected ';'
+  16   1          int tmp = 0;
+*** ERROR C141 IN LINE 16 OF DS18B20.c: syntax error near 'int', expected '__asm'
+*** ERROR C202 IN LINE 16 OF DS18B20.c: 'tmp': undefined identifier
+  17   1          float T = 0;
+*** ERROR C141 IN LINE 17 OF DS18B20.c: syntax error near 'float', expected '__asm'
+*** ERROR C202 IN LINE 17 OF DS18B20.c: 'T': undefined identifier
+  18   1          OneWire_Init();
+  19   1          OneWire_SendByte(0xCC);
+  20   1          OneWire_SendByte(0xBE);
+  21   1          TL = OneWire_ReceiveByte();
+*** ERROR C202 IN LINE 21 OF DS18B20.c: 'TL': undefined identifier
+  22   1          TH = OneWire_ReceiveByte();
+*** ERROR C202 IN LINE 22 OF DS18B20.c: 'TH': undefined identifier
+  23   1          tmp = (TH<<8) | TL;
+*** ERROR C202 IN LINE 23 OF DS18B20.c: 'tmp': undefined identifier
+  24   1          T = tmp/16.0;
+*** ERROR C202 IN LINE 24 OF DS18B20.c: 'T': undefined identifier
+  25   1          return T;
+*** ERROR C202 IN LINE 25 OF DS18B20.c: 'T': undefined identifier
+  26   1      }
+  27          
+  28          
+  29          
+  30          
+  31          
+  32          
+  33          
+  34          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  13 ERROR(S)

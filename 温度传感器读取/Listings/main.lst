@@ -1,0 +1,129 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              03/05/2023 11:00:37 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\main.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "LCD1602.h"
+   3          #include "wire.h"
+   4          #include "DS18B20.h"
+   5          #include "Delay.h"
+   6          #include "Key_Timer.h"
+*** ERROR C129 IN LINE 6 OF Key_Timer.h: missing ';' before 'retmain_key'
+   7          #include "beep.h"
+   8          #include "AT24C02.h"
+   9          #include "Timer0.h"
+  10          #define unsigned char u8
+  11          float Tem,T;
+  12          u8 TH;
+  13          u8 TL;
+  14          char KeyNum;
+  15          
+  16          int main(void)
+  17          {
+  18              DS18B20_convertT();//温度提前转换
+  19              LCD_Init();
+  20              Timer0_Init();
+  21              
+  22              LCD_ShowString(1,1,"T:");
+  23              LCD_ShowString(2,1,"TH:");
+  24              LCD_ShowString(2,9,"TL:");
+  25              TH = AT24C02_read(0);
+  26              TL = AT24C02_read(1);
+  27              if(TH > 125 || TL < -50 || TH < TL)//判断24Ｃ02赋给ＴＨＴＬ的值是否合法
+  28              {
+  29                  TH = 20;
+  30                  TL = 0;
+  31              }
+  32            for(;;)
+  33            {        
+  34                  DS18B20_convertT();
+  35                  Delay(1000);
+  36                  KeyNum = retmain_key();
+  37                  Tem = DS18B20_readT();//从18B20读取到的float值赋给Tem
+  38                  T = Tem;//Tem是显示在LCD上的，T是真实跟下面THTL做比较的
+  39                  if(Tem < 0)
+  40                  {
+  41                      LCD_ShowChar(1,3,'-');
+  42                      Tem = -Tem;//如果是负度，直接在屏幕上显示一个负号并把负float转换为正�
+             -��
+  43                  }
+  44                  else
+  45                      LCD_ShowChar(1,3,'+');
+  46                      
+  47                  LCD_ShowNum(1,4,Tem,3);//显示整数部分
+  48                  LCD_ShowChar(1,7,'.');
+  49                  LCD_ShowNum(1,8,(unsigned long)(Tem*10000)%10000,4);//显示小数部分，
+  50                                                                      //直接把float乘为整数再取余
+  51                  if(KeyNum)
+  52                  {
+C51 COMPILER V9.60.7.0   MAIN                                                              03/05/2023 11:00:37 PAGE 2   
+
+  53                      if(KeyNum == 1)
+  54                          TH++;
+  55                      if(KeyNum == 2)
+  56                          TH--;
+  57                      if(KeyNum == 3)
+  58                          TL++;
+  59                      if(KeyNum == 4)
+  60                          TL--;            
+  61                  }     
+  62                  LCD_ShowSignedNum(2,4,TH,3);
+  63                  LCD_ShowSignedNum(2,12,TL,3);
+  64                  AT24C02_write(0,TH);
+  65                  Delay(5);
+  66                  AT24C02_write(1,TL);
+  67                  Delay(5);
+  68                  if(Tem > TH)
+  69                  {
+  70                      LCD_ShowChar(1,16,'H');
+  71                      beep_alarm(1000,10);
+  72                  }
+  73                  if(Tem < TH)
+  74                  {
+  75                      LCD_ShowChar(1,16,' ');
+  76                  }
+  77                  if(Tem < TL)
+  78                  {
+  79                      LCD_ShowChar(1,16,'L');
+  80                      beep_alarm(1000,10);
+  81                  } 
+  82                  if(Tem > TL)
+  83                  {
+  84                      LCD_ShowChar(1,16,' ');
+  85                  }
+  86            }
+  87            return 0;
+  88          }
+  89          
+  90          void Timer0_Routine() interrupt 1// 1—wire对时间非常敏感，如果加上中断会经常打断1-wir
+             -e的通信，
+  91          {                                // 所以在1-wire通信的过程中要把定时器先关闭。使用EA=0
+             -，EA=1关闭定时器
+  92              static unsigned int T0Count;
+  93            TL0 = 0x66;       
+  94            TH0 = 0xFC;
+  95              T0Count++;
+  96              if(T0Count==20)
+  97              {
+  98                  T0Count = 0;
+  99                  key_timer();
+ 100              }
+ 101          }
+ 102          
+ 103          
+ 104          
+ 105          
+ 106          
+ 107          
+ 108          
+ 109          
+ 110          
+ 111          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

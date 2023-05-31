@@ -1,0 +1,65 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 1 wyy, 1, LIC=----
+ 
+Tool Versions:
+Toolchain:       PK51 Prof. Develpers Kit  Version: 9.60.7.0
+Toolchain Path:  E:\keil5_MDKorC51\C51\BIN
+C Compiler:      C51.exe V9.60.7.0
+Assembler:       A51.exe V8.2.7.0
+Linker/Locator:  BL51.exe V6.22.4.0
+Library Manager: LIB51.exe V4.30.1.0
+Hex Converter:   OH51.exe V2.7.0.0
+CPU DLL:         S8051.DLL V3.125.1.0
+Dialog DLL:      DP51.DLL V2.69.0.0 
+<h2>Project:</h2>
+D:\51单片机\温度传感器读取\project.uvproj
+Project File Date:  01/17/2023
+
+<h2>Output:</h2>
+Rebuild target 'Target 1'
+compiling main.c...
+Key_Timer.h(6): error C129: missing ';' before 'retmain_key'
+compiling Delay.c...
+compiling LCD1602.c...
+compiling wire.c...
+compiling DS18B20.c...
+DS18B20.c(14): error C202: 'u8': undefined identifier
+DS18B20.c(14): error C141: syntax error near 'TL', expected ';'
+DS18B20.c(15): error C202: 'u8': undefined identifier
+DS18B20.c(15): error C141: syntax error near 'TH', expected ';'
+DS18B20.c(16): error C141: syntax error near 'int', expected '__asm'
+DS18B20.c(16): error C202: 'tmp': undefined identifier
+DS18B20.c(17): error C141: syntax error near 'float', expected '__asm'
+DS18B20.c(17): error C202: 'T': undefined identifier
+DS18B20.c(21): error C202: 'TL': undefined identifier
+DS18B20.c(22): error C202: 'TH': undefined identifier
+DS18B20.c(23): error C202: 'tmp': undefined identifier
+DS18B20.c(24): error C202: 'T': undefined identifier
+DS18B20.c(25): error C202: 'T': undefined identifier
+compiling AT24C02.c...
+AT24C02.c(19): error C141: syntax error near 'addr', expected ')'
+AT24C02.c(24): error C202: 'addr': undefined identifier
+AT24C02.c(26): error C202: 'dat': undefined identifier
+AT24C02.c(30): error C129: missing ';' before 'AT24C02_read'
+compiling I2C.c...
+I2C.c(21): error C141: syntax error near 'dat', expected ')'
+I2C.c(23): error C141: syntax error near 'i', expected ';'
+I2C.c(23): error C202: 'i': undefined identifier
+I2C.c(24): error C202: 'i': undefined identifier
+I2C.c(26): error C202: 'dat': undefined identifier
+I2C.c(32): error C129: missing ';' before 'I2C_receive_byte'
+compiling beep.c...
+compiling key_Timer.c...
+key_Timer.c(16): error C129: missing ';' before 'Global_Key'
+compiling Timer0.c...
+Target not created.
+Build Time Elapsed:  00:00:01
+</pre>
+</body>
+</html>
