@@ -1,0 +1,82 @@
+C51 COMPILER V9.54   KEY_TIMER                                                             01/24/2023 13:34:58 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE KEY_TIMER
+OBJECT MODULE PLACED IN .\Objects\key_Timer.obj
+COMPILER INVOKED BY: E:\Keil5 C51\C51\BIN\C51.EXE key_Timer.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\key_Timer.lst) OBJECT(.\Objects\key_Timer.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          #include "Delay.h"
+   3          /*
+   4          unsigned char key()//获取独立按键键码
+   5          {
+   6              unsigned char KeyNumber = 0;
+   7              
+   8              if(P3_1 == 0){Delay(20); while(P3_1 == 0); Delay(20); KeyNumber = 1;}
+   9              if(P3_0 == 0){Delay(20); while(P3_0 == 0); Delay(20); KeyNumber = 2;}
+  10              if(P3_2 == 0){Delay(20); while(P3_2 == 0); Delay(20); KeyNumber = 3;}
+  11              if(P3_3 == 0){Delay(20); while(P3_3 == 0); Delay(20); KeyNumber = 4;}
+  12              
+  13              return KeyNumber;
+  14          }
+  15          */
+  16          u8 Global_Key;
+  17          unsigned char not_delay_key()//获取独立按键键码
+  18          {
+  19   1          unsigned char KeyNumber = 0;
+  20   1          
+  21   1          if(P3_1 == 0){KeyNumber = 1;}
+  22   1          if(P3_0 == 0){KeyNumber = 2;}
+  23   1          if(P3_2 == 0){KeyNumber = 3;}
+  24   1          if(P3_3 == 0){KeyNumber = 4;}
+  25   1          
+  26   1          return KeyNumber;
+  27   1      }
+  28          void key_timer()
+  29          {
+  30   1          static u8 last;
+  31   1          static u8 now;
+  32   1          last = now;
+  33   1          now = not_delay_key();
+  34   1          if(last == 1 && now == 0)
+  35   1              Global_Key = 1;
+  36   1          if(last == 2 && now == 0)
+  37   1              Global_Key = 2;
+  38   1          if(last == 3 && now == 0)
+  39   1              Global_Key = 3;
+  40   1          if(last == 4 && now == 0)
+  41   1              Global_Key = 4;
+  42   1      }
+  43          
+  44          u8 retmain_key()
+  45          {
+  46   1          u8 tmp = 0;
+  47   1          tmp = Global_Key;
+  48   1          Global_Key = 0;
+  49   1          return tmp;
+  50   1      }
+  51          
+  52          
+  53          
+  54          
+C51 COMPILER V9.54   KEY_TIMER                                                             01/24/2023 13:34:58 PAGE 2   
+
+  55          
+  56          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     85    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
