@@ -1,0 +1,71 @@
+C51 COMPILER V9.60.7.0   TIMER0                                                            06/12/2023 22:12:36 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE TIMER0
+OBJECT MODULE PLACED IN .\Objects\Timer0.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE Timer0.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\List
+                    -ings\Timer0.lst) OBJECT(.\Objects\Timer0.obj)
+
+line level    source
+
+   1          #include <REGX52.H>
+   2          
+   3          void Timer0_Init()//对定时器0初始化，1毫秒@11.0592MHZ
+   4          {
+   5   1              TMOD &= 0xF0;                   //设置定时器模式
+   6   1              TMOD |= 0x01;                   //设置定时器模式
+   7   1              TL0 = 0x66;                             //设置定时初始值
+   8   1              TH0 = 0xFC;                             //设置定时初始值
+   9   1              TF0 = 0;                                //清除TF0标志
+  10   1              TR0 = 1;                                //定时器0开始计时
+  11   1          ET0 = 1;
+  12   1          EA = 1;
+  13   1          PT0 = 0;
+  14   1      
+  15   1      //    //TMOD = 0x01;这种方法会改变高四位原来的值
+  16   1      //    TMOD &= 0xF0;//这种方法对高四位与1（不变），对低四位与0（清零） 
+  17   1      //    TMOD |= 0x01;//低四位0000或0001就是0001
+  18   1      //    TF0 = 0;
+  19   1      //    TR0 = 1; 
+  20   1      //    TH0 = 64535 / 256;计数单元，来一次脉冲+1，一次脉冲时间为1us
+  21   1      //    TL0 = 64535 % 256;高八位与低八位放与65535差一千的64535
+  22   1      }
+  23          
+  24          /*//定时1s的模板,不易模块化
+  25          void Timer0_Routine() interrupt 1
+  26          {
+  27              static unsigned int T0Count;
+  28                  TL0 = 0x66;                             
+  29                  TH0 = 0xFC;
+  30              T0Count++;
+  31              if(T0Count==1000)
+  32              {
+  33                  T0Count = 0;
+  34              }
+  35          }
+  36          */
+  37          
+  38          
+  39          
+  40          
+  41          
+  42          
+  43          
+  44          
+  45          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     23    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+C51 COMPILER V9.60.7.0   TIMER0                                                            06/12/2023 22:12:36 PAGE 2   
+
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,238 @@
+C51 COMPILER V9.60.7.0   MAIN                                                              06/12/2023 22:26:52 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: E:\keil5_MDKorC51\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\main.lst) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include "main.h"
+   2          
+   3          unsigned char KeyNum = 0;         // 接收矩阵键盘返回的值
+   4          unsigned char keyboard_Count = 0; // 记录键盘输入次数
+   5          unsigned char Password_Count = 0; // 记录密码输入次数
+   6          unsigned int Password = 0;        // 保存输入的密码
+   7          unsigned int Password_decide = 0; // 保存正确密码
+   8          unsigned int T0Count;             // 定时器计数器
+   9          bit isS15 = 0;                    // 判断S15按键是否被按下过
+  10          bit isCorrect = 0;                // 保存确认键是否被按下，按下则置1
+  11          
+  12          /*
+  13          ** 读出AT24C02的数据，如果没有数据则赋默认密码给Password_decide
+  14          */
+  15          void passwordInit()
+  16          {
+  17   1          // 从at24c02读取保存的密码，如果没有保存的密码就赋值1234
+  18   1          if (AT24C02_readByte(1) != 0xff && AT24C02_readByte(2) != 0xff)
+  19   1          {
+  20   2              Password_decide = 0;
+  21   2              Password_decide |= AT24C02_readByte(1) << 8; // 把高八位左移八位（超出范围后数据�
+             -�会销毁，只是往更高位移）后按位或上Num
+  22   2              Password_decide |= AT24C02_readByte(2);      // 不能直接赋值，也要按位或上低八位�
+             -�如果这句写在前面就不用或
+  23   2          }
+  24   1          else
+  25   1          {
+  26   2              Password_decide = 1234; // 初始默认密码
+  27   2          }
+  28   1      }
+  29          
+  30          /*
+  31          ** 判断是否保存密码
+  32          */
+  33          void isSave()
+  34          {
+  35   1          AT24C02_writeByte(1, Password / 256); // password高八位保存在地址1
+  36   1          Delay(5);
+  37   1          AT24C02_writeByte(2, Password % 256); // password低八位保存在地址2
+  38   1          Delay(5);
+  39   1          if (AT24C02_readByte(1) != 0xff && AT24C02_readByte(2) != 0xff)
+  40   1          {
+  41   2              LCD_ShowString(2, 1, "Save success!");
+  42   2          }
+  43   1          else
+  44   1          {
+  45   2              LCD_ShowString(2, 1, "Save error!");
+  46   2          }
+  47   1          Delay(2000);
+  48   1          Password = 0;
+  49   1          keyboard_Count = 0;
+  50   1      }
+  51          
+  52          /*
+C51 COMPILER V9.60.7.0   MAIN                                                              06/12/2023 22:26:52 PAGE 2   
+
+  53          ** 清空AT24C02保存的值
+  54          */
+  55          void AT24C02Init()
+  56          {
+  57   1          AT24C02_writeByte(1, 0xff);
+  58   1          Delay(5);
+  59   1          AT24C02_writeByte(2, 0xff);
+  60   1          Delay(5);
+  61   1      }
+  62          
+  63          /*
+  64          ** 输入密码
+  65          */
+  66          void inputPassword()
+  67          {
+  68   1          if (keyboard_Count < 4) // 只能输入四位密码
+  69   1          {
+  70   2              Password *= 10;          // 密码左移一位
+  71   2              Password += KeyNum % 10; // 下一位密码输入，10作为0，10模10就是0
+  72   2              keyboard_Count++;        // 键盘计次增加
+  73   2          }
+  74   1      }
+  75          
+  76          /*
+  77          ** 判断密码是否正确
+  78          */
+  79          void isPassword()
+  80          {
+  81   1          if (Password == Password_decide) // 判断密码是否正确
+  82   1          {
+  83   2              Password = 0;
+  84   2              keyboard_Count = 0;
+  85   2              Password_Count = 0;
+  86   2              isCorrect = 1;
+  87   2      
+  88   2              LCD_ShowString(2, 1, "Password, OK");
+  89   2              Timer0_Init();
+  90   2          }
+  91   1          else
+  92   1          {
+  93   2              Password_Count++; // 要是输入错误就计次，超过三次就报警
+  94   2              Password = 0;     // 如果输入错误，密码与计数器都清零，重新输入
+  95   2              keyboard_Count = 0;
+  96   2      
+  97   2              LCD_ShowString(2, 1, "Password, NO");
+  98   2              beep_alarm(1000, 10); // 错一次就响一次蜂鸣器
+  99   2          }
+ 100   1      }
+ 101          
+ 102          /*
+ 103          ** 删除一位密码
+ 104          */
+ 105          void isDelete()
+ 106          {
+ 107   1          if (keyboard_Count > 0)
+ 108   1          {
+ 109   2              Password /= 10;   // 密码删除一位
+ 110   2              keyboard_Count--; // 计数减少一次
+ 111   2          }
+ 112   1      }
+ 113          
+ 114          void PasswordModel()
+C51 COMPILER V9.60.7.0   MAIN                                                              06/12/2023 22:26:52 PAGE 3   
+
+ 115          {
+ 116   1          // 正常模式
+ 117   1          if (isCorrect == 0)
+ 118   1          {
+ 119   2              // s13作为确认键
+ 120   2              if (KeyNum == 13)
+ 121   2              {
+ 122   3                  isPassword();
+ 123   3              }
+ 124   2              LCD_ShowNumber(1, 10, Password);
+ 125   2          }
+ 126   1          // 修改密码模式
+ 127   1          else if (KeyNum == 15 && isCorrect == 1)
+ 128   1          {
+ 129   2              isS15 = 1;
+ 130   2              TR0 = 0; // 停止定时器计时
+ 131   2              T0Count = 0;
+ 132   2              LCD_ShowString(1, 1, "Alter password:");
+ 133   2      
+ 134   2              // s16作为确认保存键
+ 135   2              LCD_ShowNumber(2, 1, Password);
+ 136   2              LCD_ShowString(2, 5, "        ");
+ 137   2          }
+ 138   1          else
+ 139   1          {
+ 140   2              if (isCorrect == 0)
+ 141   2              {
+ 142   3                  LCD_ShowNumber(1, 10, Password);
+ 143   3                  LCD_ShowString(2, 1, "Password, OK");
+ 144   3              }
+ 145   2              if (isS15 == 1)
+ 146   2              {
+ 147   3                  LCD_ShowNumber(2, 1, Password);
+ 148   3              }
+ 149   2          }
+ 150   1      }
+ 151          
+ 152          int main(void)
+ 153          {
+ 154   1          // AT24C02Init();
+ 155   1          LCD1602_Init();
+ 156   1          LCD_ShowString(1, 1, "Password:");
+ 157   1          LCD_ShowString(2, 1, "                ");
+ 158   1          passwordInit();
+ 159   1      
+ 160   1          for (;;)
+ 161   1          {
+ 162   2              // 接收矩阵键盘返回的值
+ 163   2              KeyNum = MatrixKey();
+ 164   2              // 密码模式
+ 165   2              PasswordModel();
+ 166   2              // 键盘值不能超过10且不能为0
+ 167   2              if (KeyNum != 0 && KeyNum <= 10)
+ 168   2              {
+ 169   3                  inputPassword();
+ 170   3              }
+ 171   2              // s14作为删除键
+ 172   2              if (KeyNum == 14)
+ 173   2              {
+ 174   3                  isDelete();
+ 175   3              }
+ 176   2              if (KeyNum == 16 && isS15 == 1)
+C51 COMPILER V9.60.7.0   MAIN                                                              06/12/2023 22:26:52 PAGE 4   
+
+ 177   2              {
+ 178   3                  isS15 = 0;
+ 179   3                  isCorrect = 0;
+ 180   3                  isSave();
+ 181   3                  passwordInit();
+ 182   3                  goto Break;
+ 183   3              }
+ 184   2              // 定时器启动后如果超过三秒未有动作则结束程序
+ 185   2              if (T0Count >= 3000)
+ 186   2              {
+ 187   3                  TR0 = 0; // 停止定时器计时
+ 188   3                  T0Count = 0;
+ 189   3                  goto Break;
+ 190   3              }
+ 191   2              // 密码错误三次蜂鸣器警报
+ 192   2              if (Password_Count >= 3)
+ 193   2              {
+ 194   3                  beep_alarm(1000, 10);
+ 195   3              }
+ 196   2          }
+ 197   1      Break:
+ 198   1          return 0;
+ 199   1      }
+ 200          
+ 201          void Timer0_Routine() interrupt 1
+ 202          {
+ 203   1          TL0 = 0x66;
+ 204   1          TH0 = 0xFC;
+ 205   1          T0Count++;
+ 206   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    558    ----
+   CONSTANT SIZE    =    104    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
